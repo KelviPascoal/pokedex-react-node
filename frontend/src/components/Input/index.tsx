@@ -1,12 +1,15 @@
-// import { InputHTMLAttributes } from "react";
+import { InputHTMLAttributes } from "react";
+import { Container } from './styles'
 
-// interface InputProps extends <InputHTMLAttributes>HTMLInputElement{
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
-// }
+}
 
-export function(props: any) {
-
+export function Input(props: InputProps) {
+    const { ...rest } = props;
     return (
-        <input />
+        <Container
+
+            {...rest} />
     )
 }

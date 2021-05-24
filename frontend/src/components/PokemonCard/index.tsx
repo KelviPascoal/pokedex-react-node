@@ -2,12 +2,12 @@ import { Container, PokemonInfo } from "./styles";
 import { FaStar } from "react-icons/fa";
 
 export const PokemonBox = (props: any) => {
-    const iconeprovisorio = "<3"
     const pokemon = props.children;
-    console.log(pokemon);
+    const pokemonBgc = pokemon.types[0]
+
 
     return (
-        <Container>
+        <Container bgColor={pokemonBgc}>
             <header>
                 <span>{pokemon.number}</span>
                 <button><FaStar /></button>
@@ -17,7 +17,7 @@ export const PokemonBox = (props: any) => {
                     <img src={pokemon.img} alt="pokemon" />
                 </div>
                 <strong>{pokemon.name}</strong>
-                <span>{pokemon.type}</span>
+                <span>{pokemon.types.join(" | ")}</span>
             </PokemonInfo>
         </Container>
     )

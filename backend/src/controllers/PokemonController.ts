@@ -2,11 +2,11 @@ import express, { Request, Response } from 'express';
 import { PokemonModel } from './../models/Pokemon';
 
 export async function create(request: Request, response: Response) {
-    const { number, name, type, img } = request.body;
+    const { number, name, types, img } = request.body;
     const pokemon = {
         number: number,
         name: name,
-        type: type,
+        types: types,
         img: img
     }
     const pokemonCreated = await PokemonModel.create(pokemon);
