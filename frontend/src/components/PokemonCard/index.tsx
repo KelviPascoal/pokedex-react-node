@@ -16,8 +16,10 @@ export const PokemonBox = (props: any) => {
                 <div className="container-image">
                     <img src={pokemon.img} alt="pokemon" />
                 </div>
-                <strong>{pokemon.name}</strong>
-                <span>{pokemon.types.join(" | ")}</span>
+                <div className="container-contant">
+                    <strong>{pokemon.name}</strong>
+                    <span>{pokemon.types.join(" | ")}</span>
+                </div>
             </PokemonInfo>
         </Container>
     )

@@ -1,56 +1,110 @@
 import styled from "styled-components";
 
+
+export const Form = styled.form`
+    margin-bottom: 8px;
+    background-color: #df323b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 8px;
+    margin-bottom: 24px;
+
+
+    Button {
+            height: 26px;
+        }
+`;
+
+export const Pokedex = styled.div`
+    header {
+        display: flex;
+        justify-content: center;
+
+        button {
+            height: 3rem;
+            width: 3rem;
+            border-radius: 8px;
+            border: 0;
+            margin: 16px 8px;
+        }
+        .red-button {
+            background-color: #bf2626;
+        }
+        .green-button {
+            background-color: #4dad5b;
+        }
+    }
+
+        
+     
+`;
+
 export const Container = styled.div`
-background-color: #AFEEEE;
-margin: 0 auto;
-width: 900px;
-height: 400px;
-border-radius: 20px;
-
-display: flex;
-justify-content: space-around;
-align-items: center;
-
-        .imgContainer{
-            height: 280px;
-            width: 380px;
-            background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    .imgContainer{
+            border: 2px solid #30a7d7;
+            border-radius: 8px 0 0 8px;
+            display: flex;
+            justify-content: center;
 
             img{
-            height: 280px;
-            border-radius: 20px;
-        }
-}
+            height: 380px;
+            max-width: 380px;
+            border-radius: 8px;
+            }
+            
+            }
+        
+            
         
         .PokemonInfo {
-            height: 300px;
+            height: 380px;
+            width: 300px;
+            border: 2px solid #30a7d7;
+            border-radius: 0 8px 8px 0;
             display: flex;
             flex-direction: column;
             justify-content: space-around;
             align-items: center;
-        strong {
-            color: #303030;
-            font-size: 28px;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: #30a7d7;
 
-            &:first-letter {
-            text-transform: capitalize;
+            
+            p {
+
+                strong {
+                color: #212121;
+                font-size: 28px;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                    &:first-letter {
+                    text-transform: capitalize;
+                    }
+                
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            span {
+                padding: 0 8px;
+                color: #fff;
+                font-size: 16px;
+                border-radius: 8px;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                    &:first-letter {
+                    text-transform: capitalize;
+                    }
+                
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
         }
-        span {
-            color: #303030;
-            font-size: 22px;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
-            &:first-letter {
-            text-transform: capitalize;
             }
-        }
-    }
+           
 `;
 
-export const Form = styled.form`
-display: flex;
-justify-content: center;
-align-items: center;
-`;

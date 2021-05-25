@@ -1,23 +1,18 @@
-import { Button } from '../Button';
 import { Container } from './styles';
-import pokebolaA from '../../assets/pokebolaA.png'
+import pikachuSearch from '../../assets/pikachuSearch.png'
 import { Link } from 'react-router-dom';
-import { PokemonList } from '../../pages/PokemonList';
+import { FiPlus } from "react-icons/fi";
 
 export function Header() {
-
     return (
         <Container>
-            <div>
-                <img src={pokebolaA} alt="" />
+            <div className="container-logo">
+                <img src={pikachuSearch} alt="" />
                 <h1>Pokedex</h1>
             </div>
-
-            <div>
-                <Link to="/"><button>Minha coleção</button></Link>
-                <Link to="/buscar"><button>Mais pokemons</button></Link>
+            <div className="container-menu">
+                <Link to="/buscar"><button><FiPlus />Pokemons</button></Link>
             </div>
-
         </Container>
     )
 }

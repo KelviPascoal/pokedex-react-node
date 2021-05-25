@@ -1,15 +1,14 @@
 import { Button } from "../../components/Button"
 import { Input } from "../../components/Input"
 import { FaSearch } from "react-icons/fa";
-import { Form, Container } from './styles'
+import { Form, Pokedex, Container } from './styles'
 import { FormEvent, useEffect, useState } from "react";
 import { api } from "../../service/api";
 import { pokeApi } from "../../service/pokeApi";
-import { Footer } from '../../components/Footer'
-import pikachu from '../../assets/pikachuSearch.png'
+import { FiCheck, FiX } from "react-icons/fi";
+import { Link } from 'react-router-dom';
 
 export function PokemonSearch() {
-
     const [img, setImg] = useState('https://data.whicdn.com/images/282958081/original.gif')
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
@@ -20,7 +19,6 @@ export function PokemonSearch() {
         event.preventDefault();
         await pokeApi.get('pokemon/' + inputValue).then(response => {
             const pokemon = response.data;
-
             setName(pokemon.name)
             setNumber(pokemon.id)
             const numberPokemon = ("000" + pokemon.id).slice(-3);
@@ -30,13 +28,9 @@ export function PokemonSearch() {
         })
     }
 
-    console.log(types);
-
-
-
-    async function handleClickSave() {
+    async function handleSubmit() {
         if (!number || !name || !types || !img) {
-            throw new Error('busque o um pokemon antes de salvar')
+            return alert("Busquer um pokemon antes de salvar");
         }
         const pokemon = {
             number: number,
@@ -58,19 +52,37 @@ export function PokemonSearch() {
                     onChange={e => setInputvalue(e.target.value)} />
                 <Button type="submit"><FaSearch /></Button>
             </Form>
-            <Container>
-                <div className="imgContainer">
-                    <img src={img} alt="pokemon" />
-                </div>
+            <Pokedex>
+                <header>
+                    <div className="canfirmation-buttons">
+                        <Link to="/"><Button className="red-button"><FiX /></Button></Link>
+                        <Button className="green-button"
+                            onClick={handleSubmit}><FiCheck /></Button>
+                    </div>
+                </header>
 
-                <div className="PokemonInfo">
-                    <strong>{name}</strong>
-                    <span >{types.join(" | ")}</span>
-                    <span>{number}</span>
-                </div>
-            </Container>
-            <Button onClick={handleClickSave}>Salvar</Button>
-            <Footer imageFooter={pikachu} textFooter="" />
+                <Container>
+                    <div className="imgContainer">
+                        <img src={img} alt="pokemon" />
+                    </div>
+
+                    <div className="PokemonInfo">
+                        <p>
+                            <span>Nome</span>
+                            <strong>{name}</strong>
+                        </p>
+                        <p>
+                            <span>Tipo</span>
+                            <strong >{types.join(" | ")}</strong>
+                        </p>
+                        <p>
+                            <span>Número</span><strong>{number}</strong>
+                        </p>
+                    </div>
+                </Container>
+
+
+            </Pokedex>
 
         </>
     )

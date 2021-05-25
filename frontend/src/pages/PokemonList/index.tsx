@@ -5,7 +5,6 @@ import { api } from '../../service/api';
 import { Button } from '../../components/Button';
 import { FaSearch } from "react-icons/fa";
 import { Input } from '../../components/Input';
-import { Footer } from '../../components/Footer'
 import pikachu from '../../assets/pikachuSearch.png'
 
 interface Pokemon {
@@ -19,6 +18,7 @@ interface Pokemon {
 export function PokemonList() {
     const [pokemons, setPokemons] = useState([]);
 
+
     useEffect(() => {
         api.get("pokemons").then((response) => {
             setPokemons(response.data)
@@ -28,14 +28,12 @@ export function PokemonList() {
     return (
         <>
             <Form>
-                <Input placeholder="Buscar" />
+                <Input />
                 <Button><FaSearch /></Button>
             </Form>
-
             <Container>
                 {pokemons && pokemons.map((pokemon: Pokemon) => <PokemonBox key={pokemon.id}>{pokemon}</PokemonBox>)}
             </Container>
-            <Footer imageFooter={pikachu} textFooter="" />
         </>
     )
 }

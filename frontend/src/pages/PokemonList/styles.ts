@@ -9,8 +9,16 @@ export const Container = styled.div`
 `;
 
 export const Form = styled.form`
-display: flex;
-justify-content: center;
-align-items: center;
-margin-bottom: 8px;
-`;
+    background-color: #df323b;
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    Button {
+        height: 26px;
+
+    }
+    `;

@@ -2,41 +2,49 @@ import styled from "styled-components";
 
 export const Container = styled.div`
 height: 4rem;
-margin-bottom: 1rem;
-background-color: #c62828;
 display: flex;
 justify-content: space-between;
+background-color: #df323b;
 
-div{
-    display: flex;
-    align-items: center;
-
-    img {
-    height: 3rem;
-    margin-left: 2rem;
-
+    .container-logo{
+        display: flex;
+        align-items: center;
+        
+        margin-left: 2rem;         
+        img {
+            height: 3rem;
+            }
+        
+        h1 {
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
     }
-    h1 {
-        color: #fff;
-        margin-left: 1rem;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
-    }
-    button {
-        border: 0;
-        background-color: transparent;
-        color: #fff;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        font-size: 22px;
+    .container-menu{
         margin-right: 2rem;
-        border-radius: 90px;
-        padding: 16px;
+        display: flex;
+        align-items: center;
 
-        &:hover {
+        button {
+            border: 0;
+            background-color: transparent;
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-size: 18px;
+            margin-right: 4px;
+            border-radius: 8px;
+            padding: 8px;
             background-color: rgba(1, 1, 1, .1);
 
-        }
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
 
+            &:hover {
+                background-color: rgba(1, 1, 1, .2);
+            }
+        }
     }
-}
 `;

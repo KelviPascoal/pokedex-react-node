@@ -4,13 +4,14 @@ interface TypeColor {
     bgColor: string;
 }
 
-
-
 export const Container = styled.div<TypeColor>`
 
-${(props) => props && css`
-    background-color: var(--${props.bgColor});
-    `}
+    cursor: pointer;
+
+    ${(props) => props && css`
+        background-color: var(--${props.bgColor});
+        `}
+
     height: 400px;
     width: 260px;
     border-radius: 8px;
@@ -21,7 +22,7 @@ ${(props) => props && css`
 
     header {
         padding: 0 16px;
-
+        
         display: flex;
         justify-content: space-between;
 
@@ -35,17 +36,18 @@ ${(props) => props && css`
             color: #fff;
         }
     }
-
 `;
 
 export const PokemonInfo = styled.div`
-        padding-bottom: 20%;
-
+        padding-bottom: 15%;
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: space-around;
 
         .container-image {
+                margin-bottom: 10%;
+
                 width: 240px;
                 background-color:  rgba(255,255,255, .1);
                 border-radius: 50%;
@@ -54,28 +56,38 @@ export const PokemonInfo = styled.div`
                 justify-content: center;
                 img {
                     width: 200px;
-
                 } 
         }
 
-    strong {
-        color: #fff;
-        font-size: 28px;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        
-        &:first-letter {
-            text-transform: capitalize;
+        .container-contant{
+            background-color: rgba(1, 1, 1, .2);
+            border-radius: 8px;
+            padding: 8px 16px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            strong {
+                color: #fff;
+                font-size: 28px;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                
+                    &:first-letter {
+                    text-transform: capitalize;
+                    }
+            }
+
+            span {
+                color: #fff;
+                font-size: 18px;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+                    &:first-letter {
+                        text-transform: capitalize;
+                    }
+            }
         }
-    }
 
-    span {
-        color: #fff;
-        font-size: 18px;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-
-        &:first-letter {
-            text-transform: capitalize;
-        }
-    }
-
+    
 `;
