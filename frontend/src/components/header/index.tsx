@@ -6,12 +6,15 @@ import { FiPlus } from "react-icons/fi";
 export function Header() {
     return (
         <Container>
-            <div className="container-logo">
-                <img src={pikachuSearch} alt="" />
-                <h1>Pokedex</h1>
-            </div>
+            <Link to="/">
+                <div className="container-logo">
+                    <img src={pikachuSearch} alt="" />
+                    <h1>Pokedex</h1>
+                </div>
+            </Link>
+
             <div className="container-menu">
-                <Link to="/buscar"><button><FiPlus />Pokemons</button></Link>
+                <Link to="/buscar"><button><FiPlus />Adicionar</button></Link>
             </div>
         </Container>
     )

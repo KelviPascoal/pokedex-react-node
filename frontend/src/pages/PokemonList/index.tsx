@@ -1,38 +1,66 @@
-import { useEffect, useState } from 'react'
-import { PokemonBox } from '../../components/PokemonCard'
+import { FormEvent, useEffect, useState } from 'react'
+import { PokemonCard } from '../../components/PokemonCard'
 import { Container, Form } from './styles';
 import { api } from '../../service/api';
 import { Button } from '../../components/Button';
 import { FaSearch } from "react-icons/fa";
 import { Input } from '../../components/Input';
-import pikachu from '../../assets/pikachuSearch.png'
 
 interface Pokemon {
     id: string;
     number: Number;
     name: string;
-    type: string;
+    types: string[];
     img: string;
 }
 
 export function PokemonList() {
-    const [pokemons, setPokemons] = useState([]);
+    const [pokemonsFilter, setPokemonsFilter] = useState<Pokemon[]>([])
+    const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+    const [inputValue, setInputValue] = useState('');
+
 
 
     useEffect(() => {
         api.get("pokemons").then((response) => {
             setPokemons(response.data)
+            setPokemonsFilter(response.data)
+
         })
     }, [])
 
+    function filterPokemons(value: string) {
+
+        if (!inputValue) {
+            setPokemonsFilter(pokemons);
+            return;
+        }
+
+        const inputValueLowerCase = inputValue.toLowerCase();
+        const response = pokemons.filter((p: Pokemon) => String(p.number) == inputValue ||
+            p.name.match(inputValueLowerCase) ||
+            !!p.types.find(type => type == inputValueLowerCase));
+
+
+        setPokemonsFilter(response)
+    }
+
+    useEffect(() => {
+        filterPokemons(inputValue)
+    }, [inputValue])
+
+
     return (
         <>
-            <Form>
-                <Input />
-                <Button><FaSearch /></Button>
+            <Form >
+                <Input
+                    value={inputValue}
+                    onChange={(e) => { setInputValue(e.target.value) }}
+                />
+                <Button type="submit"><FaSearch /></Button>
             </Form>
             <Container>
-                {pokemons && pokemons.map((pokemon: Pokemon) => <PokemonBox key={pokemon.id}>{pokemon}</PokemonBox>)}
+                {pokemons && pokemonsFilter.map((pokemon: Pokemon) => <PokemonCard key={pokemon.id}>{pokemon}</PokemonCard>)}
             </Container>
         </>
     )

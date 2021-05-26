@@ -1,7 +1,7 @@
 import { Container, PokemonInfo } from "./styles";
 import { FaStar } from "react-icons/fa";
 
-export const PokemonBox = (props: any) => {
+export const PokemonCard = (props: any) => {
     const pokemon = props.children;
     const pokemonBgc = pokemon.types[0]
 

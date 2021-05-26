@@ -33,7 +33,7 @@ background-color: #df323b;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             font-size: 18px;
             margin-right: 4px;
-            border-radius: 8px;
+            border-radius: 6px;
             padding: 8px;
             background-color: rgba(1, 1, 1, .1);
 

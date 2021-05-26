@@ -2,19 +2,20 @@ import express, { Request, Response } from 'express';
 import { PokemonModel } from './../models/Pokemon';
 
 export async function create(request: Request, response: Response) {
-    const { number, name, types, img } = request.body;
+    const { number, name, types, img, abilities } = request.body;
     const pokemon = {
         number: number,
         name: name,
         types: types,
-        img: img
+        img: img,
+        abilities: abilities
     }
     const pokemonCreated = await PokemonModel.create(pokemon);
     response.status(200).json(pokemonCreated);
 }
 
 export async function findAll(request: Request, response: Response) {
-    const pokemons = await PokemonModel.find();
+    const pokemons = await PokemonModel.find().sort({ number: 'asc' });
 
     response.status(200).json(pokemons);
 }

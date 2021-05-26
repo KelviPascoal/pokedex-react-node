@@ -17,8 +17,4 @@ export const Form = styled.form`
     justify-content: center;
     align-items: center;
 
-    Button {
-        height: 26px;
-
-    }
     `;

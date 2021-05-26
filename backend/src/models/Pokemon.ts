@@ -5,5 +5,6 @@ const PokemonSchema = new mongoose.Schema({
     name: String,
     types: Array,
     img: String,
+    abilities: Array
 })
 export const PokemonModel = mongoose.model('Pokemon', PokemonSchema, 'pokemon');
