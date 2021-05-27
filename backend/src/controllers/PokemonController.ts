@@ -11,7 +11,7 @@ export async function create(request: Request, response: Response) {
         abilities: abilities
     }
     const pokemonCreated = await PokemonModel.create(pokemon);
-    response.status(200).json(pokemonCreated);
+    response.status(201).json(pokemonCreated);
 }
 
 export async function findAll(request: Request, response: Response) {

@@ -1,63 +1,85 @@
-import { FormEvent, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { PokemonCard } from '../../components/PokemonCard'
 import { Container, Form } from './styles';
 import { api } from '../../service/api';
-import { Button } from '../../components/Button';
-import { FaSearch } from "react-icons/fa";
 import { Input } from '../../components/Input';
+import Select from '../../components/Select';
+import { Pokemon } from '../../types/Pokemon'
 
-interface Pokemon {
-    id: string;
-    number: Number;
-    name: string;
-    types: string[];
-    img: string;
+interface OptionProps {
+    label: string;
+    value: string;
 }
 
 export function PokemonList() {
-    const [pokemonsFilter, setPokemonsFilter] = useState<Pokemon[]>([])
     const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+    const [pokemonsFilter, setPokemonsFilter] = useState<Pokemon[]>([])
+
     const [inputValue, setInputValue] = useState('');
-
-
+    const [optionList, setOptionList] = useState<OptionProps[]>([]);
+    const [selectTypeValue, setSelectTypeValue] = useState('')
 
     useEffect(() => {
         api.get("pokemons").then((response) => {
-            setPokemons(response.data)
-            setPokemonsFilter(response.data)
-
+            setPokemons(response.data);
+            setPokemonsFilter(response.data);
+        })
+        api.get("type").then((response) => {
+            setOptionList(response.data)
         })
     }, [])
 
-    function filterPokemons(value: string) {
 
-        if (!inputValue) {
-            setPokemonsFilter(pokemons);
-            return;
+    function filterPokemonType(typeValue: string) {
+        let pokemonsFiltred = pokemons;
+
+        if(typeValue) {
+         pokemonsFiltred = pokemons.filter((p: Pokemon) => p.types.find(type => type == typeValue))
         }
 
-        const inputValueLowerCase = inputValue.toLowerCase();
-        const response = pokemons.filter((p: Pokemon) => String(p.number) == inputValue ||
-            p.name.match(inputValueLowerCase) ||
-            !!p.types.find(type => type == inputValueLowerCase));
+        if (inputValue) {
+            pokemonsFiltred = pokemonsFiltred.filter((p: Pokemon) => String(p.number) == inputValue ||
+                p.name.match(inputValue));
+        }
 
-
-        setPokemonsFilter(response)
+        setPokemonsFilter(pokemonsFiltred);
     }
 
-    useEffect(() => {
-        filterPokemons(inputValue)
-    }, [inputValue])
+    function filterPokemonsSearch(value: string) {
+        let pokemonsFitred = pokemons;
 
+        const inputValueLowerCase = value.toLowerCase();
+
+        if(inputValueLowerCase) {
+         pokemonsFitred = pokemonsFilter.filter((p: Pokemon) => String(p.number) == inputValueLowerCase ||
+            p.name.match(inputValueLowerCase));
+        }
+
+
+        if (selectTypeValue) {
+            pokemonsFitred = pokemonsFitred.filter((p: Pokemon) => p.types.find(type => type == selectTypeValue));
+        }
+
+        setPokemonsFilter(pokemonsFitred);
+    }
 
     return (
         <>
             <Form >
                 <Input
                     value={inputValue}
-                    onChange={(e) => { setInputValue(e.target.value) }}
+                    onChange={(e) => {
+                        setInputValue(e.target.value);
+                        filterPokemonsSearch(e.target.value)
+                    }}
                 />
-                <Button type="submit"><FaSearch /></Button>
+
+                <Select onChangeCapture={event => {
+                    setSelectTypeValue(event.currentTarget.value);
+                    filterPokemonType(event.currentTarget.value);
+                }} options={optionList} />
+
+
             </Form>
             <Container>
                 {pokemons && pokemonsFilter.map((pokemon: Pokemon) => <PokemonCard key={pokemon.id}>{pokemon}</PokemonCard>)}
