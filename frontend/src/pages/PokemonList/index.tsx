@@ -20,47 +20,31 @@ export function PokemonList() {
     const [selectTypeValue, setSelectTypeValue] = useState('')
 
     useEffect(() => {
-        api.get("pokemons").then((response) => {
-            setPokemons(response.data);
-            setPokemonsFilter(response.data);
-        })
-        api.get("type").then((response) => {
-            setOptionList(response.data)
-        })
+        function loadPokemons() {
+            api.get("pokemons").then((response) => {
+                setPokemons(response.data);
+                setPokemonsFilter(response.data);
+            })
+        }
+
+        function loadTypes() {
+            api.get("type").then((response) => {
+                setOptionList(response.data)
+            })
+        }
+        loadTypes()
+        loadPokemons()
     }, [])
 
-
-    function filterPokemonType(typeValue: string) {
-        let pokemonsFiltred = pokemons;
-
-        if(typeValue) {
-         pokemonsFiltred = pokemons.filter((p: Pokemon) => p.types.find(type => type == typeValue))
-        }
-
-        if (inputValue) {
-            pokemonsFiltred = pokemonsFiltred.filter((p: Pokemon) => String(p.number) == inputValue ||
-                p.name.match(inputValue));
-        }
-
-        setPokemonsFilter(pokemonsFiltred);
+    function filterByTypes(type: string) {
+        api.get("pokemons?type=" + type + "&name=" + inputValue).then(response => {
+            setPokemonsFilter(response.data);
+        })
     }
-
-    function filterPokemonsSearch(value: string) {
-        let pokemonsFitred = pokemons;
-
-        const inputValueLowerCase = value.toLowerCase();
-
-        if(inputValueLowerCase) {
-         pokemonsFitred = pokemonsFilter.filter((p: Pokemon) => String(p.number) == inputValueLowerCase ||
-            p.name.match(inputValueLowerCase));
-        }
-
-
-        if (selectTypeValue) {
-            pokemonsFitred = pokemonsFitred.filter((p: Pokemon) => p.types.find(type => type == selectTypeValue));
-        }
-
-        setPokemonsFilter(pokemonsFitred);
+    function filterByNameOrNumber(nameOrNumber: string) {
+        api.get("pokemons?type=" + selectTypeValue + "&name=" + nameOrNumber).then(response => {
+            setPokemonsFilter(response.data);
+        })
     }
 
     return (
@@ -70,13 +54,13 @@ export function PokemonList() {
                     value={inputValue}
                     onChange={(e) => {
                         setInputValue(e.target.value);
-                        filterPokemonsSearch(e.target.value)
+                        filterByNameOrNumber(e.target.value)
                     }}
                 />
 
                 <Select onChangeCapture={event => {
                     setSelectTypeValue(event.currentTarget.value);
-                    filterPokemonType(event.currentTarget.value);
+                    filterByTypes(event.currentTarget.value)
                 }} options={optionList} />
 
 

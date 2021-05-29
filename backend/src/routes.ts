@@ -6,8 +6,11 @@ import { findAllTypes } from './controllers/TypesController';
 const routes = Router();
 
 routes.post("/pokemons", create);
+
 routes.get("/pokemons", findAll);
+
 routes.delete("/pokemons/:number", deletePokemon);
+
 
 routes.get("/type", findAllTypes);
 

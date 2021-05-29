@@ -16,7 +16,7 @@ function Select(props: SelectProps) {
         <select {...rest}>
             <option value="" >Todos</option>
             {options.map((option: Option) => <option
-                key={option.value} value={option.value}>{option.label}</option>)}
+                key={option.value} value={option.label}>{option.value}</option>)}
         </select>
     )
 }
